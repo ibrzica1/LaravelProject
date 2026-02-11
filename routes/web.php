@@ -11,6 +11,8 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     ->name('weather.page');
     Route::view('/add-weather','addWeatherPage')
     ->name('weather.add.page');
+    Route::post('/add_weather',[WeatherController::class, 'addWeather'])
+    ->name('weather.add');
 });
 
 Route::get('/dashboard', function () {

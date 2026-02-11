@@ -14,5 +14,18 @@ class WeatherController extends Controller
         return view("weather", compact('temperatures'));
     }
 
-    
+    public function addWeather(Request $request)
+    {
+        $request->validate([
+            "city" => "required|string|min:2|max:50|unique:weather,city",
+            "temperature" => "required|int|min:-80|max:80",
+        ]);
+
+        Weather::create([
+            "city" => $request->get('city'),
+            "temperature" => $request->get('temperature'),
+        ]);
+
+        return redirect()->route('weather.page');
+    }
 }
