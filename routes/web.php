@@ -13,6 +13,12 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     ->name('weather.add.page');
     Route::post('/add_weather',[WeatherController::class, 'addWeather'])
     ->name('weather.add');
+    Route::get('/delete-weather/{weather}',[WeatherController::class, 'deleteWeather'])
+    ->name('weather.delete');
+    Route::get('/edit-weather/{weather}',[WeatherController::class, 'editWeatherPage'])
+    ->name('edit.weather.page');
+    Route::patch('/edit_weather/{weather}',[WeatherController::class, 'editWeather'])
+    ->name('edit.weather');
 });
 
 Route::get('/dashboard', function () {

@@ -14,14 +14,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($temperatures as $temperature)
+        @foreach($weathers as $weather)
             <tr>
-                <th>{{$temperature->city}}</th>
-                <td>{{$temperature->temperature}}</td>
+                <th>{{$weather->city}}</th>
+                <td>{{$weather->temperature}}</td>
                 <td>
-                <a href="{{route('productDelete',['product' => $product->id])}}" class="btn btn-danger">Delete</a>
-                <a href="{{route('changeProductPage',['product' => $product->id])}}" class="btn btn-primary">Edit</a>
-            </td>
+                    <a href="{{route('weather.delete',['weather' => $weather->id])}}" class="btn btn-danger">Delete</a>
+                    <a href="{{route('edit.weather.page',['weather' => $weather->id])}}" class="btn btn-primary">Edit</a>
+                </td>
             </tr>
         @endforeach
     </tbody>
