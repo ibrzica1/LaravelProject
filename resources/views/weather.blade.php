@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 @section("pageTitle")
-    Main page
+    Weather
 @endsection
 @section("content")
-    Test321
+    <p>Test weather</p>
 @endsection
