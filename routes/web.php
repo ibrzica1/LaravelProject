@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Route;
 Route::view('/','welcome')
 ->name("home");
 Route::middleware('auth')->prefix('admin')->group(function() {
-    Route::get('/weather',[WeatherController::class, 'index']);
+    Route::get('/weather',[WeatherController::class, 'index'])
+    ->name('weather.page');
+    Route::view('/add-weather','addWeatherPage')
+    ->name('weather.add.page');
 });
 
 Route::get('/dashboard', function () {

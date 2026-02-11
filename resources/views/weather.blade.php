@@ -3,5 +3,8 @@
     Weather
 @endsection
 @section("content")
-    <p>Test weather</p>
+    <a href="{{route('weather.add.page')}}">Add Weather</a>
+    @foreach($temperatures as $temperature)
+        <p>{{$temperature->city}}: {{$temperature->temperature}} C</p>
+    @endforeach
 @endsection
