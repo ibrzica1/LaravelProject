@@ -15,14 +15,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        dd(Hash::make(fake()->password(6,20)));
-        for($i=0; $i<500; $i++)
+        $amount = $this->command->getOutput()->ask("How much users you want to create?",500);
+        $password = $this->command->getOutput()->ask("What password would you like","123456789");
+        $this->command->getOutput()->progressStart($amount);
+        for($i=0; $i<$amount; $i++)
         {
             User::create([
                 "name" => fake()->name(),
                 "email" => fake()->email(),
-                "password" => Hash::make(fake()->password(6,20)), 
+                "password" => Hash::make($password), 
             ]);
+
+            $this->command->getOutput()->progressAdvance();
         }
+        $this->command->getOutput()->progressFinish();
     }
 }
