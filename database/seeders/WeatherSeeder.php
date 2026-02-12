@@ -13,12 +13,19 @@ class WeatherSeeder extends Seeder
      */
     public function run(): void
     {
-        $city = $this->command->getOutput()->ask("Enter a city","Zagreb");
-        $temperature = $this->command->getOutput()->ask("Enter the temperature",0); 
-        
+        $weather = [
+            "Novi Sad" => 25,
+            "Osijek" => 26,
+            "Mostar" => 34,
+            "Split" => 33,
+        ];
+
+        foreach($weather as $city => $temperature)
+        {
             Weather::create([
                 "city" => $city,
                 "temperature" => $temperature,
             ]);
+        }
     }
 }
