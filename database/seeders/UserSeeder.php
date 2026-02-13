@@ -17,14 +17,31 @@ class UserSeeder extends Seeder
     {
         do{
           $name = $this->command->getOutput()->ask("What name would you like?",fake()->name());
-        
-          if(User::where('name',$name)->exists()){
+          $exist = User::where('name',$name)->exists();
+          $empty = $name === null;
+          if($empty){
+            $this->command->getOutput()->error("You didnt enter the name");
+          }
+          if($exist){
                 $this->command->getOutput()->error("User with the name $name already exists");
             }  
         }
-        while (User::where('name',$name)->exists());
+        while ($exist || $empty);
+
+        do{
+          $email = $this->command->getOutput()->ask("What email would you like?");
+          $exist = User::where('name',$name)->exists();
+          $empty = $email === null;
+          if($empty){
+            $this->command->getOutput()->error("You didnt enter the email");
+          }
+
+          if($exist){
+                $this->command->getOutput()->error("User with the email $email already exists");
+            }  
+        }
+        while ($exist || $empty);
         
-        $email = $this->command->getOutput()->ask("What email would you like?","nesto@email.com");
         $password = $this->command->getOutput()->ask("What password would you like?","123456789");
         
         User::create([
