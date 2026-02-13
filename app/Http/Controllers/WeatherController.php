@@ -55,4 +55,54 @@ class WeatherController extends Controller
 
         return redirect()->route('weather.page');
     }
+
+    public function getWeatherSingle($city)
+    {
+        $data = [
+            [
+                'city' => 'Beograd',
+                'monday' => 23,
+                'tuesday' => 24,
+                'wednesday' => 24,
+                'thursday' => 25,
+                'friday' => 23,
+            ],
+            [
+                'city' => 'Zagreb',
+                'monday' => 21,
+                'tuesday' => 22,
+                'wednesday' => 23,
+                'thursday' => 23,
+                'friday' => 21,
+            ],
+            [
+                'city' => 'Sarajevo',
+                'monday' => 24,
+                'tuesday' => 25,
+                'wednesday' => 26,
+                'thursday' => 26,
+                'friday' => 24,
+            ],
+            [
+                'city' => 'Ljubljana',
+                'monday' => 20,
+                'tuesday' => 21,
+                'wednesday' => 22,
+                'thursday' => 22,
+                'friday' => 20,
+            ],
+        ];
+        $selectedCity = [];
+        foreach($data as $singleData)
+        {
+            if(strtolower($singleData['city']) === strtolower($city)){
+                $selectedCity = $singleData;
+            }
+        }
+        if($selectedCity === null){
+            die("City $city doesnt exist");
+        }
+
+        return view('weatherSingle',compact('selectedCity'));
+    }
 }

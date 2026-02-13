@@ -19,6 +19,8 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     ->name('edit.weather.page');
     Route::patch('/edit_weather/{weather}',[WeatherController::class, 'editWeather'])
     ->name('edit.weather');
+    Route::get('/weather/{city}', [WeatherController::class, 'getWeatherSingle'])
+    ->name('weather.single');
 });
 
 Route::get('/dashboard', function () {
