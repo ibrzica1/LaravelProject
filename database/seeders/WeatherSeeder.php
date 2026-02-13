@@ -14,16 +14,16 @@ class WeatherSeeder extends Seeder
     public function run(): void
     {
         $weather = [
-            "Novi Sad" => 25,
-            "Osijek" => 26,
-            "Mostar" => 34,
-            "Split" => 33,
+            1 => 25,
+            2 => 26,
+            3 => 34,
+            4 => 33,
         ];
 
-        foreach($weather as $city => $temperature)
+        foreach($weather as $cityId => $temperature)
         {
             Weather::create([
-                "city" => $city,
+                "city_id" => $cityId,
                 "temperature" => $temperature,
             ]);
         }

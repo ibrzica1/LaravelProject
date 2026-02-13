@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('weather', function (Blueprint $table) {
             $table->id();
-            $table->string('city');
+            $table->foreignId('city_id')->constrained()->onDelete('cascade');
             $table->integer('temperature');
             $table->timestamps();
         });
