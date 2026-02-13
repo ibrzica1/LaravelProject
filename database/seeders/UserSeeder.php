@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 
         do{
           $email = $this->command->getOutput()->ask("What email would you like?");
-          $exist = User::where('name',$name)->exists();
+          $exist = User::where('email',$email)->exists();
           $empty = $email === null;
           if($empty){
             $this->command->getOutput()->error("You didnt enter the email");
