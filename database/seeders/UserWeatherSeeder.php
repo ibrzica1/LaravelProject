@@ -15,19 +15,25 @@ class UserWeatherSeeder extends Seeder
     {
         do {
             $city = $this->command->getOutput()->ask("Enter a city");
-            if($city === null){
+            $exist = Weather::where("city",$city)->exists();
+            $empty = $city === null;
+            if($empty){
                 $this->command->getOutput()->error("You didnt enter a city");
             }
-            if(Weather::where("city",$city)->exists()){
+            if($exist){
                 $this->command->getOutput()->error("City with the name $city already exists");
             }
         }
-        while(Weather::where("city",$city)->exists());
+        while($exist || $empty);
 
-        $temperature = $this->command->getOutput()->ask("Enter the temperature",); 
-        if($temperature === null){
-            $this->command->getOutput()->error("You didnt enter a temperature");
+        do {
+            $temperature = $this->command->getOutput()->ask("Enter the temperature",);
+            $empty = $temperature === null;
+            if($empty){
+                $this->command->getOutput()->error("You didnt enter a temperature");
+            }
         }
+        while ($empty);
 
             Weather::create([
                 "city" => $city,
