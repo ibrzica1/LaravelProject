@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         }
         while (User::where('name',$name)->exists());
         
-        $email = $this->command->getOutput()->ask("What email would you like?","123456789");
+        $email = $this->command->getOutput()->ask("What email would you like?","nesto@email.com");
         $password = $this->command->getOutput()->ask("What password would you like?","123456789");
         
         User::create([
