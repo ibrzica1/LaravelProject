@@ -16,7 +16,7 @@
     <tbody>
         @foreach($weathers as $weather)
             <tr>
-                <th>{{$weather->city_id}}</th>
+                <th>{{$weather->city->name}}</th>
                 <td>{{$weather->temperature}}</td>
                 <td>
                     <a href="{{route('weather.delete',['weather' => $weather->id])}}" class="btn btn-danger">Delete</a>

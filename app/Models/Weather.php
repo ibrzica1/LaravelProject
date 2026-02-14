@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Weather extends Model
 {
+    protected $table = "weather";
+
     protected $fillable = [
-        'city','temperature'
+        'city_id','temperature'
     ];
+
+    public function city()
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
+    }
 }
