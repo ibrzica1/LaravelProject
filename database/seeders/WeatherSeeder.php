@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
 use App\Models\Weather;
 use Illuminate\Database\Seeder;
 
@@ -12,18 +13,13 @@ class WeatherSeeder extends Seeder
      */
     public function run(): void
     {
-        $weather = [
-            1 => 25,
-            2 => 26,
-            3 => 34,
-            4 => 33,
-        ];
+        $cities = City::all();
 
-        foreach($weather as $cityId => $temperature)
+        foreach($cities as $city)
         {
             Weather::create([
-                "city_id" => $cityId,
-                "temperature" => $temperature,
+                "city_id" => $city->id,
+                "temperature" => rand(15,30),
             ]);
         }
     }
