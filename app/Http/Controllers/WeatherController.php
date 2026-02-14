@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Forecast;
 use App\Models\Weather;
 use Illuminate\Http\Request;
 

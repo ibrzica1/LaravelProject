@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\City;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Faker\Provider\hr_HR\Address;
-use Illuminate\Support\Testing\Fakes\Fake;
 
 class CitySeeder extends Seeder
 {
