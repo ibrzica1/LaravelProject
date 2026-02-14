@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Weather extends Model
 {
@@ -12,8 +14,10 @@ class Weather extends Model
         'city_id','temperature'
     ];
 
-    public function city()
+    public function city(): BelongsTo
     {
-        return $this->hasOne(City::class, 'id', 'city_id');
+        return $this->belongsTo(City::class);
     }
+
+    
 }
