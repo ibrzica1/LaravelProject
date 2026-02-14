@@ -22,8 +22,8 @@ class ForecastSeeder extends Seeder
             for($i=0; $i<5; $i++)
             {
                 $cityId = $city->id;
-                $temperature = rand(-10,45);
-                $date = Carbon::today()->subDays(rand(0, 365));
+                $temperature = rand(15,30);
+                $date = Carbon::today()->addDays(rand(0,30));
 
                 Forecast::create([
                     'city_id' => $cityId,
