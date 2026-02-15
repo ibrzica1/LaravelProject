@@ -12,7 +12,12 @@
     <h3>Add New Weather</h3>
     <div class="mb-3">
         <label class="form-label">City</label>
-        <input type="text" class="form-control" name="city" value="{{old('city')}}">
+        <select name="city_id" class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            @foreach($cities as $city)
+                <option value="{{$city->id}}">{{$city->name}}</option>
+            @endforeach
+        </select>
     </div>
     <div class="mb-3">
         <label class="form-label">Temperature</label>

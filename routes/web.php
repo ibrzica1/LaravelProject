@@ -10,7 +10,7 @@ Route::view('/','welcome')
 Route::middleware('auth')->prefix('admin')->group(function() {
     Route::get('/weather',[WeatherController::class, 'index'])
     ->name('weather.page');
-    Route::view('/add-weather','addWeatherPage')
+    Route::get('/add-weather',[WeatherController::class,'addWeatherPage'])
     ->name('weather.add.page');
     Route::post('/add_weather',[WeatherController::class, 'addWeather'])
     ->name('weather.add');

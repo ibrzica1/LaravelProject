@@ -16,6 +16,13 @@ class WeatherController extends Controller
         return view("weather", compact('weathers'));
     }
 
+    public function addWeatherPage()
+    {
+        $cities = City::all();
+
+        return view('addWeatherPage',compact('cities'));
+    }
+
     public function addWeather(Request $request)
     {
         $request->validate([
