@@ -3,27 +3,21 @@
     Weather
 @endsection
 @section("content")
-<h3>Weather forecast for {{$selectedCity['city']}}</h3>
+<h3>Weather forecast for {{$selectedCity->name}}</h3>
     <table class="table table-striped ">
     <thead>
         <tr>
-        <th scope="col">City</th>
-        <th scope="col">Monday</th>
-        <th scope="col">Tuesday</th>
-        <th scope="col">Wednesday</th>
-        <th scope="col">Thursday</th>
-        <th scope="col">Friday</th>
+        <th scope="col">Date</th>
+        <th scope="col">Temperature</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th>{{$selectedCity['city']}}</th>
-            <td>{{$selectedCity['monday']}}</td>
-            <td>{{$selectedCity['tuesday']}}</td>
-            <td>{{$selectedCity['wednesday']}}</td>
-            <td>{{$selectedCity['thursday']}}</td>
-            <td>{{$selectedCity['friday']}}</td>
-        </tr>
+        @foreach($selectedCity->forecasts as $forecast)
+            <tr>
+                <th>{{$forecast['date']}}</th>
+                <td>{{$forecast['temperature']}}</td>
+            </tr>
+        @endforeach
     </tbody>
     </table>
 @endsection
