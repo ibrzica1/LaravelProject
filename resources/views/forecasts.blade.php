@@ -3,7 +3,7 @@
     Forecasts
 @endsection
 @section("content")
-    <a  href="{{route('weather.add.page')}}" class="btn btn-primary btn-lg">Add Weather</a>
+    <a  href="{{route('forecasts.add.page')}}" class="btn btn-primary btn-lg">Add Forecasts</a>
 
     @foreach($cities as $city)
 

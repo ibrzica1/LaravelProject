@@ -13,6 +13,8 @@ class Forecast extends Model
         'city_id','temperature','date','weather_type','probability',
     ];
 
+    const WEATHER_TYPES = ['rainy','snowy','sunny'];
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
