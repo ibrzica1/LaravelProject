@@ -44,13 +44,7 @@ class ForecastController extends Controller
             'date' => 'required|string',
         ]);
 
-        Forecast::create([
-            'city_id' => $request->get('city_id'),
-            'temperature' => $request->get('temperature'),
-            'weather_type' => $request->get('weather_type'),
-            'probability' => $request->get('probability'),
-            'date' => $request->get('date'),
-        ]);
+        Forecast::create($request->all());
 
         return redirect()->route('forecasts.page');
     }

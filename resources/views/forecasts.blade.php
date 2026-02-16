@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($city->forecasts as $forecast)
+            @foreach($city->forecasts->sortBy('date') as $forecast)
             <tr>
                 <th>{{$forecast->date}}</th>
                 <td>{{$forecast->temperature}}</td>
