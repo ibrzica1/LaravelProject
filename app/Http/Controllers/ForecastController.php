@@ -41,7 +41,6 @@ class ForecastController extends Controller
             'city_id' => 'required|int|exists:cities,id',
             'temperature' => 'required|int|min:-80|max:80',
             'weather_type' => 'required|string',
-            'probability' => 'required|int|min:0|max:100',
             'date' => 'required|string',
         ]);
 
