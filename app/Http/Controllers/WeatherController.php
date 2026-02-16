@@ -53,7 +53,7 @@ class WeatherController extends Controller
     public function editWeather(Request $request, Weather $weather)
     {
         $request->validate([
-            "city" => "required|string|min:2|max:50",
+            "city" => "required|exists:cities,name|string|min:2|max:50",
             "temperature" => "required|int|min:-80|max:80",
         ]);
 

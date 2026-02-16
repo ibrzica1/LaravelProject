@@ -22,6 +22,8 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     ->name('edit.weather');
     Route::get('/weather/{city:name}', [ForecastController::class, 'getWeatherSingle'])
     ->name('weather.single');
+    Route::get('/forecasts', [ForecastController::class, 'forcastsPage'])
+    ->name('forecasts.page');
 });
 
 Route::get('/dashboard', function () {

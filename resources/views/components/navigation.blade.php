@@ -3,5 +3,6 @@
   <div class="container-fluid justify-content-start ">
     <a class="navbar-brand" href="{{route('home')}}">Home</a>
     <a class="navbar-brand" href="{{route('weather.page')}}">Weather</a>
+    <a class="navbar-brand" href="{{route('forecasts.page')}}">Forecasts</a>
   </div>
 </nav>

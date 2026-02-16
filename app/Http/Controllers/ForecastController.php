@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ForecastController extends Controller
 {
-     public function getWeatherSingle(City $city)
+    public function getWeatherSingle(City $city)
     {
         $selectedCity = City::find($city)->first();
 
@@ -18,5 +18,12 @@ class ForecastController extends Controller
         }
         
         return view('weatherSingle',compact('selectedCity'));
+    }
+
+    public function forcastsPage()
+    {
+        $cities = City::all();
+
+        return view('forecasts', compact('cities'));
     }
 }

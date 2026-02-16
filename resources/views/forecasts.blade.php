@@ -1,0 +1,30 @@
+@extends("layouts.layout")
+@section("pageTitle")
+    Forecasts
+@endsection
+@section("content")
+    <a  href="{{route('weather.add.page')}}" class="btn btn-primary btn-lg">Add Weather</a>
+
+    @foreach($cities as $city)
+
+        <h4>{{$city->name}}</h4>
+        <table class="table table-striped ">
+        <thead>
+            <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($city->forecasts as $forecast)
+            <tr>
+                <th>{{$forecast->date}}</th>
+                <td>{{$forecast->temperature}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+        </table>
+
+    @endforeach
+    
+@endsection

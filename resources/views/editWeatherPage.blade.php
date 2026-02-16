@@ -11,7 +11,7 @@
     @endif
     @csrf
     @method('PATCH')
-    <h3>Add New Weather</h3>
+    <h3>Edit Weather</h3>
     <div class="mb-3">
         <label class="form-label">City</label>
         <input type="text" class="form-control" name="city" value="{{$weather->city->name}}">
