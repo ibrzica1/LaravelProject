@@ -17,17 +17,13 @@
         </thead>
         <tbody>
             @foreach($city->forecasts as $forecast)
+            @php
+                $color = \App\Http\ForecastHelper::getColorByTemperature($forecast->temperature);
+            @endphp
+            
             <tr>
                 <th>{{$forecast->date}}</th>
-                @if($forecast->temperature <= 0)
-                    <td style="color:lightBlue">{{$forecast->temperature}}</td>
-                @elseif($forecast->temperature > 0 && $forecast->temperature <= 15)
-                    <td style="color:blue">{{$forecast->temperature}}</td>
-                @elseif($forecast->temperature > 15 && $forecast->temperature <= 25)
-                    <td style="color:green">{{$forecast->temperature}}</td>
-                @elseif($forecast->temperature > 25)
-                    <td style="color:red">{{$forecast->temperature}}</td>
-                @endif
+                <td>{{$forecast->temperature}}</td>
             </tr>
             @endforeach
         </tbody>
