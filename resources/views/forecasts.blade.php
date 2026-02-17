@@ -16,10 +16,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($city->forecasts->sortBy('date') as $forecast)
+            @foreach($city->forecasts as $forecast)
             <tr>
                 <th>{{$forecast->date}}</th>
-                <td>{{$forecast->temperature}}</td>
+                @if($forecast->temperature <= 0)
+                    <td style="color:lightBlue">{{$forecast->temperature}}</td>
+                @elseif($forecast->temperature > 0 && $forecast->temperature <= 15)
+                    <td style="color:blue">{{$forecast->temperature}}</td>
+                @elseif($forecast->temperature > 15 && $forecast->temperature <= 25)
+                    <td style="color:green">{{$forecast->temperature}}</td>
+                @elseif($forecast->temperature > 25)
+                    <td style="color:red">{{$forecast->temperature}}</td>
+                @endif
             </tr>
             @endforeach
         </tbody>
