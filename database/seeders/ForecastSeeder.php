@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\ForecastHelper;
 use App\Models\City;
 use App\Models\Forecast;
 use Carbon\Carbon;
@@ -15,17 +16,32 @@ class ForecastSeeder extends Seeder
     public function run(): void
     {
         $cities = City::all();
-        $weatherTypes = ['rainy','snowy','sunny'];
+        $weatherTypes = ['rainy','snowy','sunny','cloudy'];
 
         foreach($cities as $city)
         {
             for($i=0; $i<5; $i++)
             {
-                $cityId = $city->id;
-                $temperature = rand(15,30);
-                $date = Carbon::today()->addDays(rand(0,30));
-                $weatherType = $weatherTypes[array_rand($weatherTypes)];
-                $weatherType !== 'sunny' ? $probability = rand(1,100) : $probability = 0;
+                do{
+                    $cityId = $city->id;
+                    $date = Carbon::today()->addDays(rand(0,30));
+                    $weatherType = $weatherTypes[array_rand($weatherTypes)];
+                    $weatherType !== 'sunny' ? $probability = rand(1,100) : $probability = 0;
+                    
+                    if($weatherType === 'sunny'){
+                        $temperature = rand(-17,44);
+                    }
+                    elseif($weatherType === 'cloudy'){
+                        $temperature = rand(-17,15);
+                    }
+                    elseif($weatherType === 'rainy'){
+                        $temperature = rand(-10,40);
+                    }
+                    elseif($weatherType === 'snowy'){
+                        $temperature = rand(-17,1);
+                    }
+                }
+                while(ForecastHelper::compareTemperature($temperature,$cityId));
 
                 Forecast::create([
                     'city_id' => $cityId,

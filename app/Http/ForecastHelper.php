@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use app\Models\Forecast;
+
 class ForecastHelper
 {
     public static function getColorByTemperature($temperature)
@@ -17,6 +19,24 @@ class ForecastHelper
         }
         else{
             return "red";
+        }
+    }
+
+    public static function compareTemperature(int $temperature,int $cityId): bool
+    {
+        $cityForecast = Forecast::where('city_id',$cityId)->latest()->first();
+
+        if($cityForecast === null){
+            return false;
+        }
+        elseif(
+            $temperature > $cityForecast->temperature + 5 ||
+            $temperature < $cityForecast->temperature - 5
+        ){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }
