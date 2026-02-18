@@ -24,7 +24,7 @@ class ForecastSeeder extends Seeder
             {
                 do{
                     $cityId = $city->id;
-                    $date = Carbon::today()->addDays(rand(0,30));
+                    $date = ForecastHelper::dateHandler($cityId);
                     $weatherType = $weatherTypes[array_rand($weatherTypes)];
                     $weatherType !== 'sunny' ? $probability = rand(1,100) : $probability = 0;
                     

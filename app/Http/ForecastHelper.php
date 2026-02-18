@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use app\Models\Forecast;
+use Carbon\Carbon;
 
 class ForecastHelper
 {
@@ -24,7 +25,9 @@ class ForecastHelper
 
     public static function compareTemperature(int $temperature,int $cityId): bool
     {
-        $cityForecast = Forecast::where('city_id',$cityId)->latest()->first();
+        $cityForecast = Forecast::where('city_id',$cityId)
+        ->orderBy('date', 'desc')
+        ->first();
 
         if($cityForecast === null){
             return false;
@@ -38,5 +41,20 @@ class ForecastHelper
         else{
             return false;
         }
+    }
+
+    public static function dateHandler(int $cityId): string
+    {
+        $cityForecast = Forecast::where('city_id',$cityId)
+        ->orderBy('date', 'desc')
+        ->first();
+
+        if($cityForecast === null){
+            $date = Carbon::today()->addDays(rand(0,30));
+        }
+        else{
+            $date = Carbon::createFromFormat('Y-m-d', $cityForecast->date)->addDays(1);
+        }
+        return $date;
     }
 }
