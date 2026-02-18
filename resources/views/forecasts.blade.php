@@ -28,7 +28,10 @@
                             @foreach($city->forecasts as $forecast)
                             <tr>
                                 <td>{{ $forecast->date }}</td>
-                                <td>{{ $forecast->temperature }}°C</td>
+                                <td>
+                                    {{ $forecast->temperature }}°C
+                                    <img src="{{ asset('images/' . $forecast->weather_type . '.png') }}" width="30">
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
