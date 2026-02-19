@@ -50,7 +50,7 @@ class ForecastHelper
         ->first();
 
         if($cityForecast === null){
-            $date = Carbon::today()->addDays(rand(0,30));
+            $date = Carbon::today();
         }
         else{
             $date = Carbon::createFromFormat('Y-m-d', $cityForecast->date)->addDays(1);
