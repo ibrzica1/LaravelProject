@@ -28,6 +28,10 @@ Route::middleware('auth')->prefix('admin')->group(function() {
     ->name('forecasts.add.page');
     Route::post('/forecasts/add', [ForecastController::class, 'addForecast'])
     ->name('forecasts.add');
+    Route::view('forecasts/search','searchForecastPage')
+    ->name('forecasts.search.page');
+    Route::get('forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
+    ->name('forecasts.search');
 });
 
 Route::get('/dashboard', function () {

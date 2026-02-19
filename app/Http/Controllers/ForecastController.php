@@ -48,4 +48,17 @@ class ForecastController extends Controller
 
         return redirect()->route('forecasts.page');
     }
+
+    public function searchForecastCity(Request $request)
+    {
+        $cityName = $request->get('city');
+
+        $cities = City::where('name','LIKE',"%$cityName%")->get();
+
+        if(count($cities) == 0){
+            return redirect()->back()->with('error','Nothing found');
+        }
+
+        return view('searchForecast', compact('cities'));
+    }
 }
