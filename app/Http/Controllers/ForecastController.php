@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Forecast;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ForecastController extends Controller
@@ -58,7 +59,7 @@ class ForecastController extends Controller
         if(count($cities) == 0){
             return redirect()->back()->with('error','Nothing found');
         }
-
+        
         return view('searchForecast', compact('cities'));
     }
 }

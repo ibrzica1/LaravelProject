@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use app\Models\Forecast;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -24,6 +26,11 @@ class City extends Model
     public function forecasts(): HasMany
     {
         return $this->hasMany(Forecast::class)->orderBy('date');
+    }
+
+    public function todayForecast()
+    {
+        return $this->hasOne(Forecast::class)->whereDate('date',Carbon::now());
     }
 
     
