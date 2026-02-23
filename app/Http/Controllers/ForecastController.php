@@ -12,7 +12,7 @@ class ForecastController extends Controller
 {
     public function getWeatherSingle(City $city)
     {
-        $selectedCity = City::find($city)->first();
+        $selectedCity = City::with('forecasts')->find($city)->first();
 
         if($selectedCity === null){
             die("City $city doesnt exist");
@@ -23,7 +23,7 @@ class ForecastController extends Controller
 
     public function forcastsPage()
     {
-        $cities = City::all();
+        $cities = City::with('forecasts')->get();
 
         return view('forecasts', compact('cities'));
     }
@@ -54,7 +54,7 @@ class ForecastController extends Controller
     {
         $cityName = $request->get('city');
 
-        $cities = City::where('name','LIKE',"%$cityName%")->get();
+        $cities = City::with('todayForecast')->where('name','LIKE',"%$cityName%")->get();
 
         if(count($cities) == 0){
             return redirect()->back()->with('error','Nothing found');
