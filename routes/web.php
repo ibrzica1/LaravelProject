@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserCitiesController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Middleware\AdminCheckMiddleware;
+use App\Http\Middleware\UserCheckMiddleware;
 use Illuminate\Support\Facades\Route;
+use Nette\FileNotFoundException;
 
 Route::view('/','welcome')
 ->name("home");
@@ -19,7 +22,11 @@ Route::middleware('auth')->group(function() {
     ->name('forecasts.search.page');
     Route::get('forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
     ->name('forecasts.search');
+    
 });
+
+Route::get('user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])
+->name('user-cities.favorite');
 
 Route::middleware(AdminCheckMiddleware::class)->prefix('admin')
 ->group(function() {
@@ -38,6 +45,8 @@ Route::middleware(AdminCheckMiddleware::class)->prefix('admin')
     Route::post('/forecasts/add', [ForecastController::class, 'addForecast'])
     ->name('forecasts.add');
 });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
