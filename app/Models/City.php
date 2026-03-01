@@ -33,5 +33,10 @@ class City extends Model
         return $this->hasOne(Forecast::class)->whereDate('date',Carbon::now());
     }
 
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(UserCities::class);
+    }
+
     
 }

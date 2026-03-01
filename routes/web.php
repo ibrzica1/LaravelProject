@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function() {
     ->name('weather.single');
     Route::get('/forecasts', [ForecastController::class, 'forcastsPage'])
     ->name('forecasts.page');
-    Route::view('forecasts/search','searchForecastPage')
+    Route::get('forecasts/search', [UserCitiesController::class, 'favoriteTodayForecasts'])
     ->name('forecasts.search.page');
     Route::get('forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
     ->name('forecasts.search');

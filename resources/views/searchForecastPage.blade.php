@@ -16,4 +16,12 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+    @foreach($favoriteForecasts as $forecast)
+        <div class="container d-flex gap-3 mb-2">
+            <p>{{$forecast->city->name}}</p>
+            <img src="{{ asset('images/' . $forecast->weather_type . '.png') }}" width="30">
+            <p>{{$forecast->temperature}}</p>
+        </div>
+    @endforeach
+
 @endsection
