@@ -8,8 +8,18 @@
     @endif
     
    @foreach($cities as $city)
-   
-   <div class="bg-light d-flex align-items-center p-2 align-text-middle">
+
+   @if(in_array($city->id,$userFavourites))
+    <div class="bg-light d-flex align-items-center p-2 align-text-middle">
+        <a href="{{route('user-cities.favorite', ['city'=>$city->id])}}" class="btn btn-success" style="margin-right: 10px;">
+            <i class="fa-solid fa-heart"></i>
+        </a>
+        
+        <img src="{{ asset('images/' . $city->todayForecast->weather_type . '.png') }}" width="35" style="margin-right: 10px;">
+        <p>{{$city->name}}</p>
+   </div>
+   @else
+    <div class="bg-light d-flex align-items-center p-2 align-text-middle">
         <a href="{{route('user-cities.favorite', ['city'=>$city->id])}}" class="btn btn-success" style="margin-right: 10px;">
             <i class="fa-regular fa-heart"></i>
         </a>
@@ -17,6 +27,8 @@
         <img src="{{ asset('images/' . $city->todayForecast->weather_type . '.png') }}" width="35" style="margin-right: 10px;">
         <p>{{$city->name}}</p>
    </div>
+   @endif
+   
    @endforeach
 
 @endsection
