@@ -11,7 +11,7 @@
 
    @if(in_array($city->id,$userFavourites))
     <div class="bg-light d-flex align-items-center p-2 align-text-middle">
-        <a href="{{route('user-cities.favorite', ['city'=>$city->id])}}" class="btn btn-success" style="margin-right: 10px;">
+        <a href="{{route('user-cities.delete', ['city'=>$city->id])}}" class="btn btn-success" style="margin-right: 10px;">
             <i class="fa-solid fa-heart"></i>
         </a>
         

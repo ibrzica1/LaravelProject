@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function() {
 
 Route::get('user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])
 ->name('user-cities.favorite');
+Route::get('user-cities/delete/{city}',[UserCitiesController::class, 'delete'])
+->name('user-cities.delete');
 
 Route::middleware(AdminCheckMiddleware::class)->prefix('admin')
 ->group(function() {
