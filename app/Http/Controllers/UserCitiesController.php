@@ -43,6 +43,12 @@ class UserCitiesController extends Controller
 
     public function delete($cityId)
     {
+        $user = Auth::user();
+        if($user === null)
+        {
+            return redirect()->back()->with(['error'=>'You must be logged in']);
+        }
+        
         $userCity = UserCities::where('city_id',$cityId);
         $userCity->delete();
         return redirect()->back();
