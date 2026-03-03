@@ -28,15 +28,21 @@ class UserCitiesController extends Controller
 
     public function favoriteTodayForecasts()
     {
-        $favorites = UserCities::all();
+        $user = Auth::user();
         $favoriteForecasts = [];
-        foreach($favorites as $favorite)
+        
+        if($user !== null)
         {
-           if($favorite->city->todayForecast !== null)
+            $favorites = UserCities::where('user_id', $user->id)->get();
+            foreach($favorites as $favorite)
             {
-                array_push($favoriteForecasts,$favorite->city->todayForecast);
+            if($favorite->city->todayForecast !== null)
+                {
+                    array_push($favoriteForecasts,$favorite->city->todayForecast);
+                }
             }
         }
+        
         return view('searchForecastPage', compact('favoriteForecasts'));
 
     }
@@ -48,9 +54,14 @@ class UserCitiesController extends Controller
         {
             return redirect()->back()->with(['error'=>'You must be logged in']);
         }
-        
-        $userCity = UserCities::where('city_id',$cityId);
+
+        $userCity = UserCities::where([
+            'city_id' => $cityId,
+            'user_id' => $user->id,
+            ])->first();
+
         $userCity->delete();
+
         return redirect()->back();
     }
 }

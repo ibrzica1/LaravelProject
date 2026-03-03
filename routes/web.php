@@ -9,8 +9,9 @@ use App\Http\Middleware\UserCheckMiddleware;
 use Illuminate\Support\Facades\Route;
 use Nette\FileNotFoundException;
 
-Route::view('/','welcome')
-->name("home");
+Route::get('/', [UserCitiesController::class, 'favoriteTodayForecasts'])
+->name('home');
+
 Route::middleware('auth')->group(function() {
     Route::get('/weather',[WeatherController::class, 'index'])
     ->name('weather.page');
@@ -18,11 +19,8 @@ Route::middleware('auth')->group(function() {
     ->name('weather.single');
     Route::get('/forecasts', [ForecastController::class, 'forcastsPage'])
     ->name('forecasts.page');
-    Route::get('forecasts/search', [UserCitiesController::class, 'favoriteTodayForecasts'])
-    ->name('forecasts.search.page');
     Route::get('forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
     ->name('forecasts.search');
-    
 });
 
 Route::get('user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])
