@@ -12,7 +12,8 @@ class GetCurrentWeather extends Command
      *
      * @var string
      */
-    protected $signature = 'weather:get-current';
+    
+    protected $signature = 'weather:get-current {city}';
 
     /**
      * The console command description.
@@ -27,7 +28,7 @@ class GetCurrentWeather extends Command
     public function handle()
     {
         $key = "cb207081975d431d903160546260303";
-        $q = "Zagreb";
+        $q = $this->argument('city');
         $days = 1;
         $url = "http://api.weatherapi.com/v1/current.json?key=$key&q=$q&days=$days";
         
