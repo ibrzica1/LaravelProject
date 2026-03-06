@@ -33,6 +33,11 @@ class GetCurrentWeather extends Command
         $url = "http://api.weatherapi.com/v1/current.json?key=$key&q=$q&days=$days";
         
         $request = Http::get($url);
-        dd(json_decode($request->body()));
+
+        $resposnse = $request->json();
+        if(isset($resposnse['error']))
+        {
+            $this->output->error($resposnse['error']['message']);
+        }
     }
 }
