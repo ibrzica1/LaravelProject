@@ -27,11 +27,10 @@ class GetCurrentWeather extends Command
      */
     public function handle()
     {
-        $q = $this->argument('city');
         
-        $request = Http::get('http://api.weatherapi.com/v1//forecast.json',[
-            'key' => "cb207081975d431d903160546260303",
-            'q' => $q,
+        $request = Http::get(env('WEATHER_API_URL').'v1//forecast.json',[
+            'key' => env('WEATHER_API_KEY'),
+            'q' => $this->argument('city'),
             'days' => 5
         ]);
         
