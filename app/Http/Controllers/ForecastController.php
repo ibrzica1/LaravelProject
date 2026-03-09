@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Forecast;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class ForecastController extends Controller
@@ -55,9 +56,42 @@ class ForecastController extends Controller
     {
         $cityName = $request->get('city');
         $user = Auth::user();
+        $city = City::where('name',$cityName)->first();
+
+        if($city === null){
+            City::create([
+                'name'=> $cityName
+            ]);
+            $city = City::where('name',$cityName)->first();
+        }
+        
+        if($city->todayForecast === null)
+        {
+            Artisan::call('weather:get-current' ,[
+                'city' => $cityName
+            ]);
+            $data = json_decode(Artisan::output());
+            
+            if($data !== null){
+                $forecasts = $data->forecast->forecastday;
+                
+                foreach($forecasts as $forecast)
+                {
+                    Forecast::create([
+                        'city_id' => $city->id,
+                        'temperature' => round($forecast->day->avgtemp_c),
+                        'weather_type' => strtolower($forecast->day->condition->text),
+                        'date' => $forecast->date,
+                        'probability' => $forecast->day->daily_chance_of_rain
+                    ]);
+                }
+            }
+        }
+        
+
         $cities = City::with('todayForecast')->where('name','LIKE',"%$cityName%")->get();
 
-        if(count($cities) == 0){
+        if(count($cities) === 0){
             return redirect()->back()->with('error','Nothing found');
         }
 

@@ -39,6 +39,7 @@ class GetCurrentWeather extends Command
         {
             $this->output->error($resposnse['error']['message']);
         }
-        dd($resposnse);
+        
+        $this->line(json_encode($resposnse));
     }
 }
