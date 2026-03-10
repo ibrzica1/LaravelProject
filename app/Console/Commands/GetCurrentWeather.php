@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\WeatherService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -27,14 +28,9 @@ class GetCurrentWeather extends Command
      */
     public function handle()
     {
+        $weatherService = new WeatherService();
         
-        $request = Http::get(env('WEATHER_API_URL').'v1//forecast.json',[
-            'key' => env('WEATHER_API_KEY'),
-            'q' => $this->argument('city'),
-            'days' => 5
-        ]);
-        
-        $resposnse = $request->json();
+        $resposnse = $weatherService->getForecast($this->argument('city'));
         if(isset($resposnse['error']))
         {
             $this->output->error($resposnse['error']['message']);
