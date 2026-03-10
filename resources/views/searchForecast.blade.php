@@ -24,7 +24,7 @@
         </a>
         
         <img src="{{ asset('images/' . $city->todayForecast->weather_type . '.png') }}" width="35" style="margin-right: 10px;">
-        <p>{{$city->name}}</p>
+        <a href="{{route('forecast.city', ['city'=>$city->name])}}">{{$city->name}}</a>
    </div>
    @endif
    

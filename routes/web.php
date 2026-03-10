@@ -11,6 +11,8 @@ use Nette\FileNotFoundException;
 
 Route::get('/', [UserCitiesController::class, 'favoriteTodayForecasts'])
 ->name('home');
+Route::get('forecast/{city:name}',[ForecastController::class, 'cityForecastPage'])
+->name('forecast.city');
 
 Route::middleware('auth')->group(function() {
     Route::get('/weather',[WeatherController::class, 'index'])
@@ -27,8 +29,6 @@ Route::get('/user-cities/favorite/{city}', [UserCitiesController::class, 'favori
 ->name('user-cities.favorite');
 Route::get('/user-cities/delete/{city}',[UserCitiesController::class, 'delete'])
 ->name('user-cities.delete');
-Route::get('/forecast/{city}',)
-->name('forecast.city');
 
 Route::middleware(AdminCheckMiddleware::class)->prefix('admin')
 ->group(function() {

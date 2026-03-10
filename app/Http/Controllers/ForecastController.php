@@ -104,4 +104,15 @@ class ForecastController extends Controller
         
         return view('searchForecast', compact('cities','userFavourites'));
     }
+
+    public function cityForecastPage(City $city)
+    {
+        Artisan::call('weather:get-current' ,[
+                'city' => $city->name
+            ]);
+            $forecasts = json_decode(Artisan::output());
+        return view('cityForecast',compact('forecasts'));
+    }
 }
+
+
