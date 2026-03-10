@@ -16,4 +16,14 @@ class WeatherService
 
         return $response->json();
     }
+
+    public function getAstro($city)
+    {
+        $request = Http::get(env('WEATHER_API_URL').'v1//astronomy.json',[
+            'key' => env('WEATHER_API_KEY'),
+            'q' => $city,
+        ]);
+
+        return $request->json();
+    }
 }
