@@ -19,14 +19,16 @@ Route::middleware('auth')->group(function() {
     ->name('weather.single');
     Route::get('/forecasts', [ForecastController::class, 'forcastsPage'])
     ->name('forecasts.page');
-    Route::get('forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
+    Route::get('/forecasts/search/results', [ForecastController::class, 'searchForecastCity'])
     ->name('forecasts.search');
 });
 
-Route::get('user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])
+Route::get('/user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])
 ->name('user-cities.favorite');
-Route::get('user-cities/delete/{city}',[UserCitiesController::class, 'delete'])
+Route::get('/user-cities/delete/{city}',[UserCitiesController::class, 'delete'])
 ->name('user-cities.delete');
+Route::get('/forecast/{city}',)
+->name('forecast.city');
 
 Route::middleware(AdminCheckMiddleware::class)->prefix('admin')
 ->group(function() {
