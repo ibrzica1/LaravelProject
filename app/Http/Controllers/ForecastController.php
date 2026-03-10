@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ForecastController extends Controller
 {
@@ -107,11 +108,16 @@ class ForecastController extends Controller
 
     public function cityForecastPage(City $city)
     {
-        Artisan::call('weather:get-current' ,[
-                'city' => $city->name
-            ]);
-            $forecasts = json_decode(Artisan::output());
-        return view('cityForecast',compact('forecasts'));
+        $request = Http::get(env('WEATHER_API_URL').'v1//astronomy.json',[
+            'key' => env('WEATHER_API_KEY'),
+            'q' => $city->name,
+        ]);
+        
+        $resposnse = $request->json();
+        $sunrise = $resposnse['astronomy']['astro']['sunrise'];
+        $sunset =  $resposnse['astronomy']['astro']['sunset'];
+
+        return view('cityForecast',compact('sunrise','sunset'));
     }
 }
 
